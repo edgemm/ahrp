@@ -3,7 +3,7 @@ Theme Name: Inovado Child
 Description: Inovado Child Theme
 Author: Your name here
 Template: inovado
-Version: 1.0
+Version: 1.0.1
 */
 
 @import url("../inovado/style.css");
@@ -20,4 +20,11 @@ margin: 5px 0 0 0;
 .one_fourth .teaser {
 	min-height: 230px;
 	
+}
+
+/* FORMS */
+
+.sr-label {
+	width: auto;
+	float: none;
 }
