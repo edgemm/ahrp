@@ -40,17 +40,34 @@
 
 <?php wp_head(); ?>
 
-<?php // set cookie for free quote
+<?php // set cookie with quote value on form submission
 if( is_page( 314 ) ) :
 ?>
 <script type="text/javascript">
 function setQuote() {
 	<?php if( !is_user_logged_in() ) { echo "_gaq.push(['_trackEvent', 'Form', 'Submit', 'Free Quote']);"; } ?>
-	jQuery.cookie( "ahrp-quote-final", jQuery( "#sr-quote" ).val(), { expires: 1, path: "/" } );
+	jQuery.cookie( "ahrp-quote-wpe", jQuery( "#sr-quote" ).val(), { expires: 1, path: "/" } );
 	window.location = "/free-quote/thank-you/";
 }
 </script>
 <?php endif; ?>
+
+<?php // set quote value to new cookie that has been excluded from WPE cache (must be set on page load, cannot be set on form submission - per WPE)
+if( is_page( 315 ) ) :
+?>
+<script type="text/javascript">
+		jQuery( window ).load(function(){
+	jQuery.cookie( "ahrp-quote-final", jQuery.cookie( "ahrp-quote-wpe" ), { expires: 1, path: "/" } );
+	console.log( "final cookie is: " + jQuery.cookie( "ahrp-quote-final" ) );
+		});
+</script>
+<?php endif; ?>
+
+<script type="text/javascript">
+	jQuery( window ).load(function(){
+	console.log( "the cookie is: " + jQuery.cookie( "ahrp-quote-final" ) );
+	});
+</script>
 
 </head>
 

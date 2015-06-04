@@ -27,37 +27,44 @@ function getQuote( s ) {
     
     // tax rate for all states
     var t = 0.021;
+    
+    // stop gap default
+    var sg = 0;
 
     // set values based on state
     switch ( state ) {
         case "California":
             p = 0.0009075;
-            g = 23.161;
+            g = 25.0240;
             break;
         case "Oregon":
             p = 0.0006853;
-            g = 17.4915;
+            g = 18.8984;
             break;
         case "Washington":
             p = 0.0012815;
-            g = 32.729;
+            g = 35.3616;
+            sg = 35;
             break;
         case "Nevada":
             p = 0.0009075;
-            g = 23.161;
+            g = 25.0240;
             break;
         default:
             p = 0.0012815;
-            g = 32.729;
+            g = 35.3616;
+            sg = 35;
     }
 
     // calculate premiums and taxes
-    property    = tiv * p;
+    property = tiv * p;
     gl = units * g;
-    taxes = ( property + gl ) * t;
+    taxes = ( property + gl + sg ) * t;
     
     // final annual premium
-    annual = ( property + gl + taxes ).formatMoney( 2 );
+    annual = ( property + gl + taxes + sg ).formatMoney( 2 );
+    
+    // add premium
     
     // set value of annual premium field (hidden) to calculated total
     f.find( '.sr-quote' ).val( annual );

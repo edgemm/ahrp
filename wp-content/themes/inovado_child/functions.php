@@ -2,8 +2,8 @@
 
 // SCRIPTS //
 function ahrp_scripts() {
-	// load self rater scripts only for self rater page
-	if( is_page( 314 ) ) :
+	// load self rater scripts only for free quote and subsequent thank you page
+	if( is_page( array( 314, 315 ) ) ) :
 		wp_enqueue_script( 'ahrp-selfrater', get_stylesheet_directory_uri() . '/js/ahrp-selfrater.js', array(), '1.0.0', true );
 		wp_enqueue_script( 'jquery-cookie', get_stylesheet_directory_uri() . '/js/jquery.cookie.js', array(), '1.4.1', true );
 	endif;
@@ -11,7 +11,7 @@ function ahrp_scripts() {
 add_action( 'wp_enqueue_scripts', 'ahrp_scripts' );
 
 // SHORTCODES //
-function ahrp_freeQuote() {
+function ahrp_freeQuote() {	
 	return $_COOKIE[ "ahrp-quote-final" ];
 }
 add_shortcode( 'ahrp-free-quote', 'ahrp_freeQuote' );
